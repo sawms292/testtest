@@ -5,9 +5,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root12345
       MYSQL_DATABASE: cmsdb
-      # Only define MYSQL_USER/MYSQL_PASSWORD if you want a separate user
-      MYSQL_USER: appuser
-      MYSQL_PASSWORD: apppassword
+      MYSQL_USER: group500
+      MYSQL_PASSWORD: 500group
     ports:
       - "3307:3306"
     healthcheck:
@@ -22,32 +21,52 @@ services:
       - cms-network
 
   backend:
-    image: sawms/webcrafters-test:v1
+    build:
+      context: ./Backend
+    image: backend-500:dev
     container_name: backend-500
     ports:
       - "8080:8080"
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/cmsdb?allowPublicKeyRetrieval=true&useSSL=false
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: root12345
+      SPRING_DATASOURCE_USERNAME: group500
+      SPRING_DATASOURCE_PASSWORD: 500group
     depends_on:
       db:
         condition: service_healthy
-    command: >
-      java -jar /app.jar
     networks:
       - cms-network
+    develop:
+      watch:
+        - action: rebuild
+          path: ./Backend/src
+        - action: rebuild
+          path: ./Backend/pom.xml  
 
   frontend:
-    image: sawms/angular-test:v1
+    build:
+      context: ./Frontend
+      target: dev
+    image: frontend:dev
     container_name: frontend-500
     ports:
-      - "80:80"
-      - "443:443"
+      - "4200:4200"
+    volumes:
+      - ./Frontend:/app
+      - /app/node_modules  
     depends_on:
       - backend
     networks:
       - cms-network
+    develop:
+      watch:
+      - action: rebuild
+        path: ./Frontend
+        ignore:
+        - node_modules/
+        - dist/
+        - .angular/
+        - .git/
 
 volumes:
   mysql_data:

@@ -1,17 +1,25 @@
-# ---- Build stage ----
-FROM node:lts-alpine3.23 AS build
+FROM node:lts-alpine3.23 AS base
 WORKDIR /app
-
 RUN npm install -g @angular/cli
 
 COPY package*.json ./
 RUN npm ci
 
+
+FROM base AS dev
+WORKDIR /app
 COPY . ./
+EXPOSE 4200
+CMD ["ng", "serve", "--host", "0.0.0.0", "--port", "4200"]
+
+
+FROM base AS build
+WORKDIR /app
+COPY . .
 RUN ng build --configuration=production
 
-# ---- Runtime stage ----
-FROM nginx:alpine
+
+FROM nginx:alpine AS prod
 RUN rm /etc/nginx/conf.d/default.conf
 COPY default.conf /etc/nginx/conf.d/default.conf
 COPY ssl/ /etc/nginx/conf.d/
