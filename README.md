@@ -22,13 +22,13 @@
 ### Frontend
 https://hub.docker.com/r/sawms/angular-test/tags ->
 ```bash
-docker pull sawms/cms-images-springboot:latest
+docker pull sawms/angular:latest
 ```
 
 ### Backend
 https://hub.docker.com/r/sawms/springboot-test/tags ->
 ```bash
-docker pull sawms/angular-test:latest
+docker pull sawms/springboot:latest
 ```
 
 ## Instructions on how to run Docker.
@@ -100,7 +100,7 @@ services:
       - cms-network
 
   backend:
-    image: sawms/springboot-test:v1
+    image: sawms/springboot:latest
     container_name: backend-500
     env_file:
       - .env
@@ -117,7 +117,7 @@ services:
       - cms-network
 
   frontend:
-    image: sawms/angular-test:v6
+    image: sawms/angular:latest
     container_name: frontend-500
     ports:
       - "80:80"
@@ -156,9 +156,11 @@ docker-compose down -v
 2. Cybrad. (2025). #23 - How to Use WIN-ACME with Cloudflare DNS for SSL Certificate Automation. Youtu.be. https://youtu.be/rJ6dVavJsTc?si=I0GvdovFnEeQqJ7u
 3. Nell, A. M. (2025, July 16). Spring Boot Security, Step By Step — Part 1: Authentication. Medium. https://medium.com/@ansgar.nell/spring-boot-security-step-by-step-21ea836499f8
 4. Nginx. (n.d.). Configuring HTTPS servers. Nginx.org. Retrieved December 12, 2025, from https://nginx.org/en/docs/http/configuring_https_servers.html
-5. Singh Walia, A. (2024, April 16). Top 50+ Linux Commands You MUST Know | DigitalOcean. Www.digitalocean.com. https://www.digitalocean.com/community/tutorials/linux-commands
+5. Oumuamua. (2025, March 29). How to Use Docker’s Multi-Stage Builds to Separate Development and Production Environments. Medium. https://medium.com/@oumuamuaa/how-to-use-dockers-multi-stage-builds-to-separate-development-and-production-environments-ddcfc8846b33
+6. Singh Walia, A. (2024, April 16). Top 50+ Linux Commands You MUST Know | DigitalOcean. Www.digitalocean.com. https://www.digitalocean.com/community/tutorials/linux-commands
 6. Stackoverflow. (2013, September 15). How to run Nginx within a Docker container without halting? Stack Overflow. https://stackoverflow.com/questions/18861300/how-to-run-nginx-within-a-docker-container-without-halting
-7. Stackoverflow. (2022, March 12). How do I add environment variables in IntelliJ Spring Boot project. Stack Overflow. https://stackoverflow.com/questions/71450194/how-do-i-add-environment-variables-in-intellij-spring-boot-project
+7. Stackoverflow. (2021, August 15). How to write Dockerfile to serve Angular app and Node server. Stack Overflow. https://stackoverflow.com/questions/68548071/how-to-write-dockerfile-to-serve-angular-app-and-node-server
+8. Stackoverflow. (2022, March 12). How do I add environment variables in IntelliJ Spring Boot project. Stack Overflow. https://stackoverflow.com/questions/71450194/how-do-i-add-environment-variables-in-intellij-spring-boot-project
 
 ## Link for the YouTube Presentation
 
