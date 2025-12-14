@@ -1,0 +1,58 @@
+services:
+  db:
+    image: mysql:8.1
+    container_name: db-500
+    environment:
+      MYSQL_ROOT_PASSWORD: root12345
+      MYSQL_DATABASE: cmsdb
+      # Only define MYSQL_USER/MYSQL_PASSWORD if you want a separate user
+      MYSQL_USER: appuser
+      MYSQL_PASSWORD: apppassword
+    ports:
+      - "3307:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot12345"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - cms-network
+
+  backend:
+    image: sawms/webcrafters-test:v1
+    container_name: backend-500
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/cmsdb?allowPublicKeyRetrieval=true&useSSL=false
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root12345
+    depends_on:
+      db:
+        condition: service_healthy
+    command: >
+      java -jar /app.jar
+    networks:
+      - cms-network
+
+  frontend:
+    image: sawms/angular-test:v1
+    container_name: frontend-500
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - backend
+    networks:
+      - cms-network
+
+volumes:
+  mysql_data:
+
+networks:
+  cms-network:
+    driver: bridge
+
