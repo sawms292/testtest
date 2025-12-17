@@ -8,6 +8,9 @@
 1. Other related info (if any)
 
 ## Title of your application (a unique title)
+<strong> ConfHub360 </strong>
+
+
 ## Abstract (in 300 words)
    1. Background
    2. Problem Statement (from article)
