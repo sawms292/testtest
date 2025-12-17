@@ -1,5 +1,14 @@
-# Dockerfile
+FROM maven:3.9.6-eclipse-temurin-21 AS build
+COPY . .
+RUN mvn clean package -DskipTests
+
+
 FROM eclipse-temurin:21-jdk
-COPY target/confease-backend-0.0.1-SNAPSHOT.jar app.jar
-ENTRYPOINT ["java","-jar","/app.jar"]
+WORKDIR /app
+COPY sql /docker-entrypoint-initdb.d
+COPY sql /init-sql
+VOLUME /init-sql
+
+COPY --from=build /target/*.jar app.jar
+ENTRYPOINT ["java","-jar","app.jar"]
 

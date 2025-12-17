@@ -17,6 +17,7 @@ services:
       start_period: 20s
     volumes:
       - mysql_data:/var/lib/mysql
+      - ./Backend/sql:/docker-entrypoint-initdb.d
     networks:
       - cms-network
 
@@ -41,7 +42,9 @@ services:
         - action: rebuild
           path: ./Backend/src
         - action: rebuild
-          path: ./Backend/pom.xml  
+          path: ./Backend/pom.xml
+        - action: rebuild
+          path: ./Backend/src/main/java/com/webcrafters/confease_backend/
 
   frontend:
     build:
@@ -70,6 +73,7 @@ services:
 
 volumes:
   mysql_data:
+  cms_sql:
 
 networks:
   cms-network:
