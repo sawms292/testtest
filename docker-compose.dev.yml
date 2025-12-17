@@ -43,8 +43,6 @@ services:
           path: ./Backend/src
         - action: rebuild
           path: ./Backend/pom.xml
-        - action: rebuild
-          path: ./Backend/src/main/java/com/webcrafters/confease_backend/
 
   frontend:
     build:

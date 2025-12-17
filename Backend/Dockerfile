@@ -1,7 +1,8 @@
 FROM maven:3.9.6-eclipse-temurin-21 AS build
+COPY pom.xml .
+RUN mvn -B dependency:go-offline
 COPY . .
-RUN mvn clean package -DskipTests
-
+RUN mvn -B clean package -Dmaven.test.skip
 
 FROM eclipse-temurin:21-jdk
 WORKDIR /app
