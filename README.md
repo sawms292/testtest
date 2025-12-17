@@ -1,4 +1,4 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/j93TiVAg)
+<img width="465" height="114" alt="image" src="https://github.com/user-attachments/assets/e5767a62-dc2f-40f1-bc15-1efaf44c5d26" />[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/j93TiVAg)
 ## Requirements for Assignment-3
 [Read the instruction](https://github.com/STIWK2124-A251/class-activity-stiwk2124/blob/main/Assignment-3.md)
 
@@ -148,6 +148,60 @@ docker-compose down -v
 ```
 
 ## List of all the endpoints
+**1. AUTHORS**
+| HTTP Method | Endpoint             | Description                   | Request Body | 
+|-------------|--------------------|-------------------------------|---------------|
+| GET         | `/api/authors`      | Get all authors               | None         | 
+| GET         | `/api/authors/{id}` | Get author by ID              | None         | 
+| POST        | `/api/authors`      | Create a new author           | Author JSON  | 
+| PUT         | `/api/authors/{id}` | Update an existing author     | Author JSON  | 
+| DELETE      | `/api/authors/{id}` | Delete an author by ID        | None         | 
+
+**2. CONFERENCES**
+| HTTP Method | Endpoint             | Description                   | Request Body | 
+|-------------|--------------------|-------------------------------|---------------|
+| GET         | `/api/conferences`      | Get all conference               | None         | 
+| GET         | `/api/conferences/{id}` | Get conference by ID              | None         | 
+| POST        | `/api/conferences`      | Create a new conference           | Author JSON  | 
+| PUT         | `/api/conferences/{id}` | Update an existing conference     | Author JSON  | 
+| DELETE      | `/api/conferences/{id}` | Delete an conference by ID        | None         | 
+
+**3. EMAIL LOGS**
+| HTTP Method | Endpoint             | Description                   | Request Body | 
+|-------------|--------------------|-------------------------------|---------------|
+| GET         | `/api/email-logs`      | Get all email-log               | None         | 
+| GET         | `/api/email-logs/{id}` | Get email-log by ID              | None         | 
+| POST        | `/api/email-logs`      | Create a new email-log           | Author JSON  | 
+| PUT         | `/api/email-logs/{id}` | Update an existing email-log     | Author JSON  | 
+| DELETE      | `/api/email-logs/{id}` | Delete an email-log by ID        | None         |
+
+**4. EVENTS**
+| HTTP Method | Endpoint             | Description                   | Request Body | 
+|-------------|--------------------|-------------------------------|---------------|
+| GET         | `/api/events`      | Get all event               | None         | 
+| GET         | `/api/events/{id}` | Get event by ID              | None         | 
+| POST        | `/api/events`      | Create a new event           | Author JSON  | 
+| PUT         | `/api/events/{id}` | Update an existing event     | Author JSON  | 
+| DELETE      | `/api/events/{id}` | Delete an event by ID        | None         |
+
+**5. KEYWORDS**
+| HTTP Method | Endpoint             | Description                   | Request Body | 
+|-------------|--------------------|-------------------------------|---------------|
+| GET         | `/api/keywords`      | Get all keyword               | None         | 
+| GET         | `/api/keywords/{id}` | Get keyword by ID              | None         | 
+| POST        | `/api/keywords`      | Create a new keyword           | Author JSON  | 
+| PUT         | `/api/keywords/{id}` | Update an existing keyword     | Author JSON  | 
+| DELETE      | `/api/keywords/{id}` | Delete an keyword by ID        | None         |
+
+**6. LOG ACTIVITIES**
+| HTTP Method | Endpoint             | Description                   | Request Body | 
+|-------------|--------------------|-------------------------------|---------------|
+| GET         | `/api/log-activities`      | Get all log activity               | None         | 
+| GET         | `/api/log-activities/{id}` | Get log activity by ID              | None         | 
+| POST        | `/api/log-activities`      | Create a new log activity           | Author JSON  | 
+| PUT         | `/api/log-activities/{id}` | Update an existing log activity     | Author JSON  | 
+| DELETE      | `/api/log-activities/{id}` | Delete an log activity by ID        | None         |
+
 
 ## Result/Output (Screenshot of the output)
 
