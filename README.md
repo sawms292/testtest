@@ -13,11 +13,28 @@
 
 ## Abstract (in 300 words)
    1. Background
+   
+The process of conference management by hand or by disjointed tools may be time-consuming and inaccurate. Organizers have difficulties in scheduling the sessions, following the registration process and keeping the records of participants. The standardized digital system will promote workflow, data consistency, and user experience.
+  
    2. Problem Statement (from article)
+   
+   
    3. Main objective
+
+The main objective of ConfHub360 is to provide an efficient and user-friendly platform that streamlines the organization of conferences, simplifies session scheduling, and improves attendee management. The system aims to reduce administrative overhead, enhance data consistency, and offer organizers and participants a seamless experience.
+   
    4. Methodology
+
+The system was implemented using Angular for the frontend and Spring Boot for the backend, connected to a MySQL database. Both applications were containerized with Docker and pushed to Docker Hub for easy distribution. Features include conference creation, session scheduling, and attendee registration management.
+   
    5. Result
+
+ConfHub360 successfully provides a responsive interface for organizers and attendees. Dockerization allows seamless deployment across environments. The system efficiently manages conferences, sessions, and registrations, demonstrating improved workflow, organization, and data consistency.
+   
    6. Conclusion
+
+The adoption of the contemporary web systems and containers can greatly improve the management of conferences. ConfHub360 saves on administration, provides trustworthy data management, and is the centralized hub of the organizers and attendees, which proves that technology may be utilized to make event management efficient.
+
 
 ## Link for Docker Image
 
