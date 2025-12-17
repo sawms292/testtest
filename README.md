@@ -201,6 +201,59 @@ docker-compose down -v
 | PUT         | `/api/log-activities/{id}` | Update an existing log activity     | Author JSON  | 
 | DELETE      | `/api/log-activities/{id}` | Delete an log activity by ID        | None         |
 
+**7. NOTIFICATIONS**
+| HTTP Method | Endpoint             | Description                   | Request Body | 
+|-------------|--------------------|-------------------------------|---------------|
+| GET         | `/api/notifications`      | Get all notification               | None         | 
+| GET         | `/api/notifications/{id}` | Get notification by ID              | None         | 
+| POST        | `/api/notifications`      | Create a new notification           | Author JSON  | 
+| PUT         | `/api/notifications/{id}` | Update an existing notification     | Author JSON  | 
+| DELETE      | `/api/notifications/{id}` | Delete an notification by ID        | None         |
+
+**8. PAPERS**
+| HTTP Method | Endpoint             | Description                   | Request Body | 
+|-------------|--------------------|-------------------------------|---------------|
+| GET         | `/api/papers`      | Get all paper               | None         | 
+| GET         | `/api/papers/{id}` | Get paper by ID              | None         | 
+| POST        | `/api/papers`      | Create a new paper           | Author JSON  | 
+| PUT         | `/api/papers/{id}` | Update an existing paper     | Author JSON  | 
+| DELETE      | `/api/papers/{id}` | Delete an paper by ID        | None         |
+
+**9. PAPER KEYWORDS**
+| HTTP Method | Endpoint             | Description                   | Request Body | 
+|-------------|--------------------|-------------------------------|---------------|
+| GET         | `/api/paper-keywords`      | Get all paper keyword               | None         | 
+| GET         | `/api/paper-keywords/{id}` | Get paper keyword by ID              | None         | 
+| POST        | `/api/paper-keywords`      | Create a new paper keyword           | Author JSON  | 
+| PUT         | `/api/paper-keywords/{id}` | Update an existing paper keyword     | Author JSON  | 
+| DELETE      | `/api/paper-keywords/{id}` | Delete an paper keyword by ID        | None         |
+
+**10. PAYMENTS**
+| HTTP Method | Endpoint             | Description                   | Request Body | 
+|-------------|--------------------|-------------------------------|---------------|
+| GET         | `/api/payments`      | Get all payment               | None         | 
+| GET         | `/api/payments/{id}` | Get payment by ID              | None         | 
+| POST        | `/api/payments`      | Create a new payment           | Author JSON  | 
+| PUT         | `/api/payments/{id}` | Update an existing payment     | Author JSON  | 
+| DELETE      | `/api/payments/{id}` | Delete an payment by ID        | None         |
+
+**11. REBUTTALS**
+| HTTP Method | Endpoint             | Description                   | Request Body | 
+|-------------|--------------------|-------------------------------|---------------|
+| GET         | `/api/rebuttals`      | Get all rebuttal               | None         | 
+| GET         | `/api/rebuttals/{id}` | Get rebuttal by ID              | None         | 
+| POST        | `/api/rebuttals`      | Create a new rebuttal           | Author JSON  | 
+| PUT         | `/api/rebuttals/{id}` | Update an existing rebuttal     | Author JSON  | 
+| DELETE      | `/api/rebuttals/{id}` | Delete an rebuttal by ID        | None         |
+
+**12. REGISTRATIONS**
+| HTTP Method | Endpoint             | Description                   | Request Body | 
+|-------------|--------------------|-------------------------------|---------------|
+| GET         | `/api/registrations`      | Get all registration               | None         | 
+| GET         | `/api/registrations/{id}` | Get registration by ID              | None         | 
+| POST        | `/api/registrations`      | Create a new registration           | Author JSON  | 
+| PUT         | `/api/registrations/{id}` | Update an existing registration     | Author JSON  | 
+| DELETE      | `/api/registrations/{id}` | Delete an registration by ID        | None         |
 
 ## Result/Output (Screenshot of the output)
 
