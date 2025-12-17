@@ -1,4 +1,3 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/j93TiVAg)
 ## Requirements for Assignment-3
 [Read the instruction](https://github.com/STIWK2124-A251/class-activity-stiwk2124/blob/main/Assignment-3.md)
 
@@ -9,6 +8,9 @@
 1. Other related info (if any)
 
 ## Title of your application (a unique title)
+<strong> ConfHub360 </strong>
+
+
 ## Abstract (in 300 words)
    1. Background
    2. Problem Statement (from article)
@@ -19,13 +21,255 @@
 
 ## Link for Docker Image
 
+### Frontend
+https://hub.docker.com/r/sawms/angular-test/tags ->
+```bash
+docker pull sawms/angular:latest
+```
+
+### Backend
+https://hub.docker.com/r/sawms/springboot-test/tags ->
+```bash
+docker pull sawms/springboot:latest
+```
+
 ## Instructions on how to run Docker.
+### Create a folder
+```bash
+mkdir conf
+cd conf
+```
+
+### Create the .env file
+1. For Windows
+```bash
+notepad .env
+```
+
+2. For linux and mac
+```bash
+touch .env
+```
+
+3. Copy .env file
+```bash
+# --- .env ---
+# Database configuration
+MYSQL_ROOT_PASSWORD=root12345
+DB_USER=group500
+DB_PASSWORD=500group
+
+#Smtp configuration
+SMTP_USERNAME=
+SMTP_PASSWORD=
+```
+
+### Create the yml file
+1. For Windows
+```bash
+notepad docker-compose.yml
+```
+
+2. For linux and mac
+```bash
+touch docker-compose.yml
+```
+
+3. Copy yml source code
+```bash
+services:
+  db:
+    image: mysql:8.1
+    container_name: db-500
+    env_file:
+      - .env
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: cmsdb
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "3307:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-p${MYSQL_ROOT_PASSWORD}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - cms-network
+
+  backend:
+    image: sawms/springboot:latest
+    container_name: backend-500
+    env_file:
+      - .env
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/cmsdb?allowPublicKeyRetrieval=true&useSSL=false
+      SPRING_DATASOURCE_USERNAME: ${DB_USER}
+      SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD}
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - cms-network
+
+  frontend:
+    image: sawms/angular:latest
+    container_name: frontend-500
+    ports:
+      - "80:80"
+      - "8081:80"
+      - "443:443"
+    depends_on:
+      - backend
+    networks:
+      - cms-network
+
+volumes:
+  mysql_data:
+
+networks:
+  cms-network:
+    driver: bridge
+```
+
+### start,stop the docker container
+1. To start the images
+```bash
+docker-compose up -d
+```
+
+2. To stop and remove the container volumes
+```bash
+docker-compose down -v
+```
 
 ## List of all the endpoints
+**1. AUTHORS**
+| HTTP Method | Endpoint             | Description                   | Request Body | 
+|-------------|--------------------|-------------------------------|---------------|
+| GET         | `/api/authors`      | Get all authors               | None         | 
+| GET         | `/api/authors/{id}` | Get author by ID              | None         | 
+| POST        | `/api/authors`      | Create a new author           | Author JSON  | 
+| PUT         | `/api/authors/{id}` | Update an existing author     | Author JSON  | 
+| DELETE      | `/api/authors/{id}` | Delete an author by ID        | None         | 
+
+**2. CONFERENCES**
+| HTTP Method | Endpoint             | Description                   | Request Body | 
+|-------------|--------------------|-------------------------------|---------------|
+| GET         | `/api/conferences`      | Get all conference               | None         | 
+| GET         | `/api/conferences/{id}` | Get conference by ID              | None         | 
+| POST        | `/api/conferences`      | Create a new conference           | Author JSON  | 
+| PUT         | `/api/conferences/{id}` | Update an existing conference     | Author JSON  | 
+| DELETE      | `/api/conferences/{id}` | Delete an conference by ID        | None         | 
+
+**3. EMAIL LOGS**
+| HTTP Method | Endpoint             | Description                   | Request Body | 
+|-------------|--------------------|-------------------------------|---------------|
+| GET         | `/api/email-logs`      | Get all email-log               | None         | 
+| GET         | `/api/email-logs/{id}` | Get email-log by ID              | None         | 
+| POST        | `/api/email-logs`      | Create a new email-log           | Author JSON  | 
+| PUT         | `/api/email-logs/{id}` | Update an existing email-log     | Author JSON  | 
+| DELETE      | `/api/email-logs/{id}` | Delete an email-log by ID        | None         |
+
+**4. EVENTS**
+| HTTP Method | Endpoint             | Description                   | Request Body | 
+|-------------|--------------------|-------------------------------|---------------|
+| GET         | `/api/events`      | Get all event               | None         | 
+| GET         | `/api/events/{id}` | Get event by ID              | None         | 
+| POST        | `/api/events`      | Create a new event           | Author JSON  | 
+| PUT         | `/api/events/{id}` | Update an existing event     | Author JSON  | 
+| DELETE      | `/api/events/{id}` | Delete an event by ID        | None         |
+
+**5. KEYWORDS**
+| HTTP Method | Endpoint             | Description                   | Request Body | 
+|-------------|--------------------|-------------------------------|---------------|
+| GET         | `/api/keywords`      | Get all keyword               | None         | 
+| GET         | `/api/keywords/{id}` | Get keyword by ID              | None         | 
+| POST        | `/api/keywords`      | Create a new keyword           | Author JSON  | 
+| PUT         | `/api/keywords/{id}` | Update an existing keyword     | Author JSON  | 
+| DELETE      | `/api/keywords/{id}` | Delete an keyword by ID        | None         |
+
+**6. LOG ACTIVITIES**
+| HTTP Method | Endpoint             | Description                   | Request Body | 
+|-------------|--------------------|-------------------------------|---------------|
+| GET         | `/api/log-activities`      | Get all log activity               | None         | 
+| GET         | `/api/log-activities/{id}` | Get log activity by ID              | None         | 
+| POST        | `/api/log-activities`      | Create a new log activity           | Author JSON  | 
+| PUT         | `/api/log-activities/{id}` | Update an existing log activity     | Author JSON  | 
+| DELETE      | `/api/log-activities/{id}` | Delete an log activity by ID        | None         |
+
+**7. NOTIFICATIONS**
+| HTTP Method | Endpoint             | Description                   | Request Body | 
+|-------------|--------------------|-------------------------------|---------------|
+| GET         | `/api/notifications`      | Get all notification               | None         | 
+| GET         | `/api/notifications/{id}` | Get notification by ID              | None         | 
+| POST        | `/api/notifications`      | Create a new notification           | Author JSON  | 
+| PUT         | `/api/notifications/{id}` | Update an existing notification     | Author JSON  | 
+| DELETE      | `/api/notifications/{id}` | Delete an notification by ID        | None         |
+
+**8. PAPERS**
+| HTTP Method | Endpoint             | Description                   | Request Body | 
+|-------------|--------------------|-------------------------------|---------------|
+| GET         | `/api/papers`      | Get all paper               | None         | 
+| GET         | `/api/papers/{id}` | Get paper by ID              | None         | 
+| POST        | `/api/papers`      | Create a new paper           | Author JSON  | 
+| PUT         | `/api/papers/{id}` | Update an existing paper     | Author JSON  | 
+| DELETE      | `/api/papers/{id}` | Delete an paper by ID        | None         |
+
+**9. PAPER KEYWORDS**
+| HTTP Method | Endpoint             | Description                   | Request Body | 
+|-------------|--------------------|-------------------------------|---------------|
+| GET         | `/api/paper-keywords`      | Get all paper keyword               | None         | 
+| GET         | `/api/paper-keywords/{id}` | Get paper keyword by ID              | None         | 
+| POST        | `/api/paper-keywords`      | Create a new paper keyword           | Author JSON  | 
+| PUT         | `/api/paper-keywords/{id}` | Update an existing paper keyword     | Author JSON  | 
+| DELETE      | `/api/paper-keywords/{id}` | Delete an paper keyword by ID        | None         |
+
+**10. PAYMENTS**
+| HTTP Method | Endpoint             | Description                   | Request Body | 
+|-------------|--------------------|-------------------------------|---------------|
+| GET         | `/api/payments`      | Get all payment               | None         | 
+| GET         | `/api/payments/{id}` | Get payment by ID              | None         | 
+| POST        | `/api/payments`      | Create a new payment           | Author JSON  | 
+| PUT         | `/api/payments/{id}` | Update an existing payment     | Author JSON  | 
+| DELETE      | `/api/payments/{id}` | Delete an payment by ID        | None         |
+
+**11. REBUTTALS**
+| HTTP Method | Endpoint             | Description                   | Request Body | 
+|-------------|--------------------|-------------------------------|---------------|
+| GET         | `/api/rebuttals`      | Get all rebuttal               | None         | 
+| GET         | `/api/rebuttals/{id}` | Get rebuttal by ID              | None         | 
+| POST        | `/api/rebuttals`      | Create a new rebuttal           | Author JSON  | 
+| PUT         | `/api/rebuttals/{id}` | Update an existing rebuttal     | Author JSON  | 
+| DELETE      | `/api/rebuttals/{id}` | Delete an rebuttal by ID        | None         |
+
+**12. REGISTRATIONS**
+| HTTP Method | Endpoint             | Description                   | Request Body | 
+|-------------|--------------------|-------------------------------|---------------|
+| GET         | `/api/registrations`      | Get all registration               | None         | 
+| GET         | `/api/registrations/{id}` | Get registration by ID              | None         | 
+| POST        | `/api/registrations`      | Create a new registration           | Author JSON  | 
+| PUT         | `/api/registrations/{id}` | Update an existing registration     | Author JSON  | 
+| DELETE      | `/api/registrations/{id}` | Delete an registration by ID        | None         |
 
 ## Result/Output (Screenshot of the output)
 
 ## References (Not less than 20)
+1. Antoine, J. (2024, November 5). Hosting an Angular application inside a Docker container with nginx. Medium. https://jonathanantoine.medium.com/hosting-an-angular-application-inside-a-docker-container-with-nginx-b10f3f0a4c26
+2. Cybrad. (2025). #23 - How to Use WIN-ACME with Cloudflare DNS for SSL Certificate Automation. Youtu.be. https://youtu.be/rJ6dVavJsTc?si=I0GvdovFnEeQqJ7u
+3. Nell, A. M. (2025, July 16). Spring Boot Security, Step By Step — Part 1: Authentication. Medium. https://medium.com/@ansgar.nell/spring-boot-security-step-by-step-21ea836499f8
+4. Nginx. (n.d.). Configuring HTTPS servers. Nginx.org. Retrieved December 12, 2025, from https://nginx.org/en/docs/http/configuring_https_servers.html
+5. Oumuamua. (2025, March 29). How to Use Docker’s Multi-Stage Builds to Separate Development and Production Environments. Medium. https://medium.com/@oumuamuaa/how-to-use-dockers-multi-stage-builds-to-separate-development-and-production-environments-ddcfc8846b33
+6. Singh Walia, A. (2024, April 16). Top 50+ Linux Commands You MUST Know | DigitalOcean. Www.digitalocean.com. https://www.digitalocean.com/community/tutorials/linux-commands
+6. Stackoverflow. (2013, September 15). How to run Nginx within a Docker container without halting? Stack Overflow. https://stackoverflow.com/questions/18861300/how-to-run-nginx-within-a-docker-container-without-halting
+7. Stackoverflow. (2021, August 15). How to write Dockerfile to serve Angular app and Node server. Stack Overflow. https://stackoverflow.com/questions/68548071/how-to-write-dockerfile-to-serve-angular-app-and-node-server
+8. Stackoverflow. (2022, March 12). How do I add environment variables in IntelliJ Spring Boot project. Stack Overflow. https://stackoverflow.com/questions/71450194/how-do-i-add-environment-variables-in-intellij-spring-boot-project
 
 ## Link for the YouTube Presentation
 
